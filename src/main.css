@@ -1,0 +1,18 @@
+.App{
+    display: grid;
+    grid-template-areas: 
+    'nav nav nav'
+    '. content .';
+ 
+}
+.content{
+    grid-area: content;
+    margin-top: 30px;
+}
+
+.comment{
+    padding: 15px;
+    margin: 10px 0;
+    background-color: rgba(204, 203, 203, 0.466);
+    border-radius: 10px;
+}

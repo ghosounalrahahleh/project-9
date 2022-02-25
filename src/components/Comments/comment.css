@@ -1,0 +1,7 @@
+.comment__form input:focus{
+outline: none !important;
+}
+.comment__form input{
+border: none !important;
+
+}

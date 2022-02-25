@@ -1,0 +1,12 @@
+ .content .ui.card {
+    margin: 1em 0;
+    width: 100% !important;
+    height: 499px;
+ }
+
+ .ui.card:last-child {
+     margin-bottom: 50px;
+ }
+ .post__content{
+     width: 100%;
+ }
