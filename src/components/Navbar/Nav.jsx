@@ -1,13 +1,17 @@
 import React, { useEffect } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "./nav.css";
 const Nav = ({ LoggedIn, setLoggedIn }) => {
+  let navigate = useNavigate(''); 
   useEffect(() => {
    sessionStorage.getItem("currentUser") ? setLoggedIn(true) :setLoggedIn(false)
  },[setLoggedIn])
+ 
   const logoutHandler = () => {
+    navigate("/login");
     setLoggedIn(false);
     sessionStorage.clear();
+    
   };
 
   return (
@@ -37,9 +41,9 @@ const Nav = ({ LoggedIn, setLoggedIn }) => {
           </NavLink>
         )}
         {LoggedIn ? (
-          <NavLink to="/logout" className="item" onClick={logoutHandler}>
+          <a  className="item" onClick={logoutHandler}>
             Logout
-          </NavLink>
+          </a>
         ) : (
           <NavLink to="/login" className="item">
             Login

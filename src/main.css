@@ -7,12 +7,6 @@
 }
 .content{
     grid-area: content;
-    margin-top: 30px;
+    margin: 30px auto;
 }
 
-.comment{
-    padding: 15px;
-    margin: 10px 0;
-    background-color: rgba(204, 203, 203, 0.466);
-    border-radius: 10px;
-}

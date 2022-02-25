@@ -5,3 +5,16 @@ outline: none !important;
 border: none !important;
 
 }
+.menu div{
+    margin: 5px ;
+    width: 50px;
+}
+ #single__comment {
+  
+ padding:1px 5px  ;
+    background-color: rgba(204, 203, 203, 0.466);
+    border-radius: 10px;
+}
+.btn{
+    cursor: pointer;
+}

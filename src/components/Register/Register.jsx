@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import {  useNavigate } from "react-router-dom";
+import faker from "@faker-js/faker";
 
 const Register = ({ LoggedIn, setLoggedIn }) => {
   let navigate = useNavigate();
   const [errors, setErrors] = useState([]);
   const [user, setUser] = useState({
     id: Math.random() * 1000,
+    image : faker.image.avatar(),
     name: "",
     email: "",
     password: "",
@@ -74,7 +76,7 @@ const Register = ({ LoggedIn, setLoggedIn }) => {
         let newUsers = [...users, user];
         localStorage.setItem("users", JSON.stringify(newUsers));
       }
-      sessionStorage.setItem("currentUser", JSON.stringify(user));
+      sessionStorage.setItem("currentUser", JSON.stringify([user]));
     
       setUser({
         name: "",

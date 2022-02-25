@@ -1,17 +1,19 @@
 import React, { useEffect, useState } from "react";
 import moment from "moment";
-const PostForm = ({ posts, setPosts, setDisplay }) => {
+import { useNavigate } from "react-router-dom";
+
+
+const PostForm = ({ posts, setPosts, setDisplay, LoggedIn, setLoggedIn }) => {
   const [content, setContent] = useState("");
   const [images, setImages] = useState("");
   const [imageURLs, setImageURLs] = useState("");
-
+  let navigate = useNavigate();
   const contentHandler = (e) => {
     setContent(e.target.value);
   };
   const imageHandler = (e) => {
     setImages([...e.target.files]);
   };
-
 
   useEffect(() => {
     if (images.length < 1) return;
@@ -21,20 +23,21 @@ const PostForm = ({ posts, setPosts, setDisplay }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
+
     let user = JSON.parse(sessionStorage.getItem("currentUser"));
+  
     let post = {
+      id: Math.random() * 1000,
       content: content,
       name: user.name,
       userId: user.id,
-      date: moment().format("MMMM Do YYYY, h:mm:ss a"),
-      id: Math.random() * 1000,
+      date: moment().calendar(),
       image: imageURLs,
     };
 
-
     if (JSON.parse(localStorage.getItem("posts")) === null) {
       localStorage.setItem("posts", JSON.stringify([post]));
-       setPosts([post]);
+      setPosts([post]);
     } else {
       let posts = JSON.parse(localStorage.getItem("posts"));
       let newPosts = [...posts, post];

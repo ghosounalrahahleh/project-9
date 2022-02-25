@@ -1,6 +1,6 @@
 import React from "react";
 import faker from "@faker-js/faker";
-import Comment from "./Comment.jsx";
+import Comment from "./Comments/Comment.jsx";
 const CommentApproval = ({
   comments,
   setComments,

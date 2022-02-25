@@ -2,21 +2,41 @@ import React, { useEffect, useState } from "react";
 import PostForm from "./PostForm";
 import faker from "@faker-js/faker";
 import CommentInput from "../Comments/CommentInput";
+import Comment from "../Comments/Comment";
+import { useNavigate } from "react-router-dom";
 
-const PostCard = ({ posts, setPosts, display, setDisplay }) => {
-
-  //var localPosts = JSON.parse(localStorage.getItem("posts"));
+const PostCard = ({
+  posts,
+  setPosts,
+  display,
+  setDisplay,
+  LoggedIn,
+  setLoggedIn,
+  comments,
+  setComments,
+}) => {
+  let navigate = useNavigate;
+  const [currentUser, setCurrentUser] = useState();
   const showHandler = () => {
     setDisplay(true);
   };
-  console.log(posts);
-  useEffect(() => {
-    var localPosts = JSON.parse(localStorage.getItem("posts"));
-    console.log(localPosts);
-   setPosts([localPosts]);
 
-  }, [setPosts]);
- console.log(posts);
+  useEffect(() => {
+  
+  if (sessionStorage.getItem("currentUser"))
+   { var user = JSON.parse(sessionStorage.getItem("currentUser"));}
+    setCurrentUser(user);
+    if (localStorage.getItem("comments")) {
+      var localComments = JSON.parse(localStorage.getItem("comments"));
+    }
+     if (localStorage.getItem("posts")) {
+       var localPosts = JSON.parse(localStorage.getItem("posts"));
+     }
+    console.log(localComments);
+    setPosts([localPosts]);
+    setComments([localComments]);
+  }, [setPosts, setComments, setCurrentUser]);
+
   return (
     <div className="content">
       {display ? (
@@ -25,6 +45,8 @@ const PostCard = ({ posts, setPosts, display, setDisplay }) => {
           setPosts={setPosts}
           display={display}
           setDisplay={setDisplay}
+          LoggedIn={LoggedIn}
+          setLoggedIn={setLoggedIn}
         />
       ) : (
         <button className="ui button" type="submit" onClick={showHandler}>
@@ -32,7 +54,7 @@ const PostCard = ({ posts, setPosts, display, setDisplay }) => {
         </button>
       )}
 
-      {JSON.parse(localStorage.getItem("posts")) === null
+      {localStorage.getItem("posts") === null
         ? "No posts yet"
         : JSON.parse(localStorage.getItem("posts")).map((post) => (
             <div className="ui card post" key={post.id}>
@@ -41,7 +63,7 @@ const PostCard = ({ posts, setPosts, display, setDisplay }) => {
                 <img
                   className="ui avatar image"
                   alt={post.name}
-                  src={faker.image.avatar()}
+                  src={JSON.parse(sessionStorage.getItem("currentUser")).image}
                 />
                 {post.name}
               </div>
@@ -50,14 +72,41 @@ const PostCard = ({ posts, setPosts, display, setDisplay }) => {
                   {post.content}
                 </div>
               </div>
-              <div className="image">
-                <img src={post.image} />
-              </div>
+              {post.image ? (
+                <div className="image">
+                  <img src={post.image} alt="post" />
+                </div>
+              ) : (
+                ""
+              )}
+
               <div className="extra content">
                 <div className="ui large transparent left icon input">
-                  <i className="heart outline icon"></i>
-                  <CommentInput />
+                  <CommentInput
+                    postId={post.id}
+                    comments={comments}
+                    setComments={setComments}
+                  />
                 </div>
+              </div>
+              <div className="extra content">
+                {localStorage.getItem("comments") === null
+                  ? ""
+                  : JSON.parse(localStorage.getItem("comments")).map(
+                      (comment) =>
+                        comment.postId === post.id ? (
+                          <Comment
+                            comment={comment}
+                            id={comment.id}
+                            key={comment.id}
+                            comments={comments}
+                            setComments={setComments}
+                            currentUser={currentUser}
+                          />
+                        ) : (
+                          ""
+                        )
+                    )}
               </div>
             </div>
           ))}

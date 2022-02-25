@@ -1,7 +1,6 @@
-import React, { useImperativeHandle, useState } from "react";
+import React, { useState } from "react";
 
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Form from "./components/Form.jsx";
+import { BrowserRouter, Route, Routes, useNavigate } from "react-router-dom";
 import Nav from "./components/Navbar/Nav.jsx";
 import Register from "./components/Register/Register.jsx";
 import Login from "./components/Login/Login.jsx";
@@ -10,11 +9,10 @@ import PostCard from "./components/Post/PostCard.jsx";
 import Redirect from "./components/Error/Error.jsx";
 
 function App() {
-  const [comments, setComments] = useState([]);
-  const [approvedComments, setApprovedComments] = useState([]);
   const [posts, setPosts] = useState([]);
   const [LoggedIn, setLoggedIn] = useState(false);
   const [display, setDisplay] = useState(false);
+  const [comments, setComments] = useState([]);;
   return (
     <BrowserRouter>
       <Nav LoggedIn={LoggedIn} setLoggedIn={setLoggedIn} />
@@ -29,19 +27,6 @@ function App() {
             element={<Login LoggedIn={LoggedIn} setLoggedIn={setLoggedIn} />}
           />
           <Route
-            path="/comments"
-            element={
-              <Form
-                comments={comments}
-                setComments={setComments}
-                display={display}
-                setDisplay={setDisplay}
-                approvedComments={approvedComments}
-                setApprovedComments={setApprovedComments}
-              />
-            }
-          />
-          <Route
             path="/"
             element={
               <PostCard
@@ -49,13 +34,15 @@ function App() {
                 setDisplay={setDisplay}
                 posts={posts}
                 setPosts={setPosts}
+                LoggedIn={LoggedIn}
+                setLoggedIn={setLoggedIn}
+                comments={comments}
+                setComments={setComments}
               />
             }
           />
-          <Route
-            path="*" element={<Redirect /> }
-            />
-         
+          <Route path="" element={<Redirect />} />
+          <Route path="*" element={<Redirect />} />
         </Routes>
       </div>
     </BrowserRouter>
