@@ -8,7 +8,7 @@ const Nav = ({ LoggedIn, setLoggedIn }) => {
  },[setLoggedIn])
  
   const logoutHandler = () => {
-    navigate("/login");
+    navigate("/");
     setLoggedIn(false);
     sessionStorage.clear();
     
@@ -29,25 +29,14 @@ const Nav = ({ LoggedIn, setLoggedIn }) => {
       </div>
 
       <div className="nav-links">
-        <NavLink to="/" className="item">
-          {" "}
-          Home
-        </NavLink>
+        {LoggedIn ? <NavLink to="/home" className="item">  Home </NavLink>:""}
+
+        {LoggedIn ? "" : <NavLink to="/register" className="item">Register</NavLink>}
+
         {LoggedIn ? (
-          ""
+          <a  className="item" onClick={logoutHandler}> Logout </a>
         ) : (
-          <NavLink to="/register" className="item">
-            Register
-          </NavLink>
-        )}
-        {LoggedIn ? (
-          <a  className="item" onClick={logoutHandler}>
-            Logout
-          </a>
-        ) : (
-          <NavLink to="/login" className="item">
-            Login
-          </NavLink>
+          <NavLink to="/" className="item"> Login </NavLink>
         )}
       </div>
     </div>

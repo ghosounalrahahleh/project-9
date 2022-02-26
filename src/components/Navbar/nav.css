@@ -11,8 +11,9 @@ body {
     grid-area: nav;
     height: 50px;
     width: 100%;
-    background-color: #4d4d4d;
+    background-color: #6435c9;
     position: relative;
+    padding: 0 50px;
 }
 
 .nav>.nav-header {
@@ -41,10 +42,12 @@ body {
     padding: 13px 10px 13px 10px;
     text-decoration: none;
     color: #efefef;
+    transform: translateY(0);
+    transition: all .3s ;
 }
 
 .nav>.nav-links>a:hover {
-    background-color: rgba(0, 0, 0, 0.3);
+    transform: translateY(-5px);
 }
 
 .nav>#nav-check {

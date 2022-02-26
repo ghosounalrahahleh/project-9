@@ -5,7 +5,6 @@ const Login = ({ LoggedIn, setLoggedIn }) => {
   let navigate = useNavigate();
   const [errors, setErrors] = useState([]);
   const [user, setUser] = useState({
-    name: "",
     email: "",
     password: "",
   });
@@ -42,6 +41,7 @@ const Login = ({ LoggedIn, setLoggedIn }) => {
       isValid = false;
     } else if (JSON.parse(localStorage.getItem("users")) !== null) {
       var users = JSON.parse(localStorage.getItem("users"));
+     
       var u = users.filter((u) => {
         if (u.email === user.email) return true;
       });
@@ -49,12 +49,12 @@ const Login = ({ LoggedIn, setLoggedIn }) => {
         errors["email"] = "You have to register first :) ";
         isValid = false;
       } else if (u[0].password !== user.password) {
-          console.log(u[0].password);
-          console.log(user.password);
+
         errors["password"] = "Wrong password  :( ";
         isValid = false;
       }else{
         setErrors([]);
+        console.log(u); 
         sessionStorage.setItem("currentUser", JSON.stringify(u));
 
 
@@ -66,7 +66,7 @@ const Login = ({ LoggedIn, setLoggedIn }) => {
           email: "",
           password: "",
         });
-        navigate('/');
+        navigate("/home");
       }
     }
     setErrors(errors);
@@ -76,37 +76,38 @@ const Login = ({ LoggedIn, setLoggedIn }) => {
 
   return (
     <div className="content">
-
-    <form className="ui form" onSubmit={submitHandler}>
-      <div className="field">
-        <label>E-mail</label>
-        <input
-          type="email"
-          name="email"
-          value={user.email}
-          onChange={setValue}
-        />
-        <div className={errors.email === undefined ? "" : "ui red message"}>
-          {errors.email}
+      <form className="ui form" onSubmit={submitHandler}>
+        <div className="field">
+          <label>E-mail</label>
+          <input
+            type="email"
+            name="email"
+            value={user.email}
+            onChange={setValue}
+          />
+          <div className={errors.email === undefined ? "" : "ui red message"}>
+            {errors.email}
+          </div>
         </div>
-      </div>
-      <div className="field">
-        <label>Password</label>
-        <input
-          type="password"
-          name="password"
-          value={user.password}
-          onChange={setValue}
-          autoComplete="on"
-        />
-        <div className={errors.password === undefined ? "" : "ui red message"}>
-          {errors.password}
+        <div className="field">
+          <label>Password</label>
+          <input
+            type="password"
+            name="password"
+            value={user.password}
+            onChange={setValue}
+            autoComplete="on"
+          />
+          <div
+            className={errors.password === undefined ? "" : "ui red message"}
+          >
+            {errors.password}
+          </div>
         </div>
-      </div>
-      <button className="ui button" type="submit">
-        Login
-      </button>
-    </form>
+        <button className="ui violet button" type="submit">
+          Login
+        </button>
+      </form>
     </div>
   );
 };

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
 
-
 const PostForm = ({ posts, setPosts, setDisplay, LoggedIn, setLoggedIn }) => {
   const [content, setContent] = useState("");
   const [images, setImages] = useState("");
@@ -25,7 +24,6 @@ const PostForm = ({ posts, setPosts, setDisplay, LoggedIn, setLoggedIn }) => {
     e.preventDefault();
 
     let user = JSON.parse(sessionStorage.getItem("currentUser"));
-  
     let post = {
       id: Math.random() * 1000,
       content: content,
@@ -34,7 +32,7 @@ const PostForm = ({ posts, setPosts, setDisplay, LoggedIn, setLoggedIn }) => {
       date: moment().calendar(),
       image: imageURLs,
     };
-
+    console.log(post);
     if (JSON.parse(localStorage.getItem("posts")) === null) {
       localStorage.setItem("posts", JSON.stringify([post]));
       setPosts([post]);

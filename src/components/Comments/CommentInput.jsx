@@ -36,7 +36,7 @@ const CommentInput = ({ postId, comments, setComments, currentUser }) => {
       }
       setComment("");
     } else {
-      navigate("/login");
+      navigate("/");
     }
   };
   return (

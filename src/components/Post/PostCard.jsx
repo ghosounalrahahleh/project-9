@@ -32,9 +32,9 @@ const PostCard = ({
      if (localStorage.getItem("posts")) {
        var localPosts = JSON.parse(localStorage.getItem("posts"));
      }
-    console.log(localComments);
     setPosts([localPosts]);
     setComments([localComments]);
+
   }, [setPosts, setComments, setCurrentUser]);
 
   return (
@@ -57,13 +57,16 @@ const PostCard = ({
       {localStorage.getItem("posts") === null
         ? "No posts yet"
         : JSON.parse(localStorage.getItem("posts")).map((post) => (
-            <div className="ui card post" key={post.id}>
+            <div className="ui card post " id="content__post" key={post.id}>
+            
               <div className="content">
                 <div className="right floated meta">{post.date}</div>
                 <img
                   className="ui avatar image"
                   alt={post.name}
-                  src={JSON.parse(sessionStorage.getItem("currentUser")).image}
+                  src={
+                    JSON.parse(sessionStorage.getItem("currentUser"))[0].image
+                  }
                 />
                 {post.name}
               </div>
@@ -79,7 +82,6 @@ const PostCard = ({
               ) : (
                 ""
               )}
-
               <div className="extra content">
                 <div className="ui large transparent left icon input">
                   <CommentInput

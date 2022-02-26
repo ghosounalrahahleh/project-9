@@ -23,11 +23,11 @@ function App() {
             element={<Register LoggedIn={LoggedIn} setLoggedIn={setLoggedIn} />}
           />
           <Route
-            path="/login"
+            path="/"
             element={<Login LoggedIn={LoggedIn} setLoggedIn={setLoggedIn} />}
           />
           <Route
-            path="/"
+            path="/home"
             element={
               <PostCard
                 display={display}

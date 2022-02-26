@@ -82,56 +82,65 @@ const Register = ({ LoggedIn, setLoggedIn }) => {
         name: "",
         email: "",
         password: "",
+        image: "",
+        id: "",
       });
       setLoggedIn(true);
-      navigate('/')
+      navigate("/home");
     }
   };
 
   return (
     <div className="content">
-
-    <form className="ui form" onSubmit={submitHandler}>
-      <div className="field">
-        <label>Full Name</label>
-        <input type="text" name="name" value={user.name} onChange={setValue} />
-        <div className={errors.name === undefined ? "" : "ui red message"}>
-          {errors.name}
+      <form className="ui form" onSubmit={submitHandler}>
+        <div className="field">
+          <label>Full Name</label>
+          <input
+            type="text"
+            name="name"
+            value={user.name}
+            onChange={setValue}
+          />
+          <div className={errors.name === undefined ? "" : "ui red message"}>
+            {errors.name}
+          </div>
         </div>
-      </div>
-      <div className="field">
-        <label>E-mail</label>
-        <input
-          type="email"
-          name="email"
-          value={user.email}
-          onChange={setValue}
-        />
-        <div className={errors.email === undefined ? "" : "ui red message"}>
-          {errors.email}
+        <div className="field">
+          <label>E-mail</label>
+          <input
+            type="email"
+            name="email"
+            value={user.email}
+            onChange={setValue}
+          />
+          <div className={errors.email === undefined ? "" : "ui red message"}>
+            {errors.email}
+          </div>
         </div>
-      </div>
-      <div className="field">
-        <label>Password</label>
-        <input
-          type="password"
-          name="password"
-          value={user.password}
-          onChange={setValue}
-          autoComplete="on"
-        />
-        <div className={errors.password === undefined ? "" : "ui red message"}>
-          {errors.password}
+        <div className="field">
+          <label>Password</label>
+          <input
+            type="password"
+            name="password"
+            value={user.password}
+            onChange={setValue}
+            autoComplete="on"
+          />
+          <div
+            className={errors.password === undefined ? "" : "ui red message"}
+          >
+            {errors.password}
+          </div>
         </div>
-      </div>
-      {/* <div className="field">
+        {/* <div className="field">
         <label>Confirm Password</label>
         <input type="password" name="confirm_password" onChange={setValue} />
       </div> */}
-      <button className="ui button" type="submit">
-        Register
-      </button>
-    </form></div>
+        <button className="ui violet button" type="submit">
+          Register
+        </button>
+      </form>
+    </div>
   );
 };
 export default Register;
