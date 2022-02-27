@@ -6,6 +6,7 @@ const PostForm = ({ posts, setPosts, setDisplay, LoggedIn, setLoggedIn }) => {
   const [content, setContent] = useState("");
   const [images, setImages] = useState("");
   const [imageURLs, setImageURLs] = useState("");
+  const [user, setUser] = useState("");
   let navigate = useNavigate();
   const contentHandler = (e) => {
     setContent(e.target.value);
@@ -22,8 +23,8 @@ const PostForm = ({ posts, setPosts, setDisplay, LoggedIn, setLoggedIn }) => {
 
   const submitHandler = (e) => {
     e.preventDefault();
-
-    let user = JSON.parse(sessionStorage.getItem("currentUser"));
+    setUser(JSON.parse(sessionStorage.getItem("currentUser"))[0]);
+    console.log(user);
     let post = {
       id: Math.random() * 1000,
       content: content,

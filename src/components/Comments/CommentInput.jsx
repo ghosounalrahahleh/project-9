@@ -29,7 +29,7 @@ const CommentInput = ({ postId, comments, setComments, currentUser }) => {
         localStorage.setItem("comments", JSON.stringify([userComment]));
         setComments([userComment]);
       } else {
-        let comments = JSON.parse(localStorage.getItem("comments"));
+        let comments    = JSON.parse(localStorage.getItem("comments"));
         let newComments = [...comments, userComment];
         localStorage.setItem("comments", JSON.stringify(newComments));
         setComments(newComments);

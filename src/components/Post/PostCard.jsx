@@ -65,7 +65,7 @@ const PostCard = ({
                   className="ui avatar image"
                   alt={post.name}
                   src={
-                    JSON.parse(sessionStorage.getItem("currentUser"))[0].image
+                    JSON.parse(sessionStorage.getItem("currentUser")).image
                   }
                 />
                 {post.name}

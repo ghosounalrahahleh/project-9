@@ -42,7 +42,7 @@ const Comment = ({ comment, id, comments, setComments, currentUser }) => {
             <img
               className="ui avatar image"
               alt={"user"}
-              src={JSON.parse(sessionStorage.getItem("currentUser"))[0].image}
+              src={JSON.parse(sessionStorage.getItem("currentUser")).image}
             />
           </p>
           <div className="content">
